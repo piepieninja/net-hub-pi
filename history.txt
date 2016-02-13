@@ -1,0 +1,62 @@
+ 9957  ls
+ 9958  rm *~
+ 9959  cd ..
+ 9960  ls
+ 9961  git clone https://github.com/piepieninja/net-hub-pi.git
+ 9962  ls
+ 9963  cd net-hub-pi
+ 9964  ls
+ 9965  cealr
+ 9966  clear
+ 9967  ls
+ 9968  ll
+ 9969  l
+ 9970  emacs example.burn.sh
+ 9971  ls
+ 9972  /Volumes/UNTITLED
+ 9973  ls
+ 9974  dev
+ 9975  cd net-hub-pi
+ 9976  emacs example.burn.sh
+ 9977  ls /Volumes/UNTITLED
+ 9978  ls
+ 9979  rm *~
+ 9980  emasc .gitignore
+ 9981  emacs .gitignore
+ 9982  ls
+ 9983  cp ~/Downloads/raspberry_35_inch_ts/rpi_35_B_B+_PI2.img
+ 9984  cp ~/Downloads/raspberry_35_inch_ts/rpi_35_B_B+_PI2.img .
+ 9985  ls
+ 9986  rm *.img
+ 9987  cp ~/Downloads/raspberry_35_inch_ts.rar .
+ 9988  l
+ 9989  emacs example.burn.sh
+ 9990  ls
+ 9991  bash example.burn.sh
+ 9992  emacs example.burn.sh
+ 9993  diskutil list
+ 9994  emacs example.burn.sh
+ 9995  ls
+ 9996  rm *~
+ 9997  git commit -am "initial commit"
+ 9998  git add --all
+ 9999  git commit -am "initial commit"
+10000  git push
+10001  dev
+10002  cd net-hub-pi
+10003  ls
+10004  bash example.burn.sh
+10005  diskutil unmount /dev/disk2
+10006  diskutil unmountDisk /dev/disk2
+10007  sudo dd if=~/Downloads/raspberry_35_inch_ts/rpi_35_B_B+_PI2.img of=/dev/disk2 bs=1m
+10008  sudo dd if=/Users/calebadams/Downloads/raspberry_35_inch_ts/rpi_35_B_B+_PI2.img of=/dev/disk2 bs=1m
+10009  ls
+10010  emacs .gitignore
+10011  git add --all
+10012  mv raspberry_35_inch_ts.rar ../
+10013  ks
+10014  ls
+10015  git add --all
+10016  git push
+10017  ls
+10018  tail -50 history
