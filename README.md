@@ -15,7 +15,7 @@ You will need to extract the img file from this .rar
 In this directory you will see an <code>example.burn.sh file</code>. This (along with the <code>history.txt</code> file) contains what I did to burn the image to an SD card. Genrally follow:
 
 1. Find the SD card by running <code>diskutil list</code>.
-2. Try to unmoun the disk with <code>diskutil unmount /dev/SOME_DISK<code/> (for me this was diskutil unmount /dev/disk2)
+2. Try to unmoun the disk with <code>diskutil unmount /dev/SOME_DISK</code> (for me this was diskutil unmount /dev/disk2)
 3. start burning the image. THIS MAY TAKE A WHILE! <code>dd if=path_of_your_image.img of=/dev/SOME_DISK bs=1m</code>
 
 Once you have done this Raspian should boot on your pi
