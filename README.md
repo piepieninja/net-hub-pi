@@ -1,10 +1,10 @@
 # net-hub-pi
 A raspberry pi with a touchscreen that acts as a visual network hub
 
-I bought my Raspberry pi touch screen for 17$ on amazaon [here](http://www.amazon.com/gp/product/B013E0IJVE?psc=1&redirect=true&ref_=oh_aui_detailpage_o00_s00 here)
+I bought my Raspberry pi touch screen for 17$ on amazaon [here](http://www.amazon.com/gp/product/B013E0IJVE?psc=1&redirect=true&ref_=oh_aui_detailpage_o00_s00)
 
 ## installing the OS
-Download the Osoyoo Raspian 7 with special drivers here: [Osoyoo Downloads](http://osoyoo.com/wp-content/uploads/samplecode/ Osoyoo Downloads)
+Download the Osoyoo Raspian 7 with special drivers here: [Osoyoo Downloads](http://osoyoo.com/wp-content/uploads/samplecode/)
 
 You should download the .rar file titled: <code>raspberry_35_inch_ts.rar</code>
 
@@ -24,7 +24,7 @@ Once you have done this Raspian should boot on your pi
 TDB
 
 ### Configuring the Pi
-follow your standard pi wifi set ups. I had a wireless dongle so I did what the standard guide says: [Connect Pi to Wifi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md Connect Pi to Wifi)
+follow your standard pi wifi set ups. I had a wireless dongle so I did what the standard guide says: [Connect Pi to Wifi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
 
 I also had to set my keyboard to US settings by editing my <code>/etc/default/keyboard</code>. Just: 
 
