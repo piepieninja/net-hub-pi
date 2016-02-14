@@ -1,8 +1,23 @@
-echo 'installing...'
+#!/bin/bash
 
-cp ~/net-hub-pi/app/netapp ~/Desktop
-chmod +x ~/Desktop/netapp
+# install
+if [ ! -f ~/Desktop/netapp ]; then
+   echo 'installing...'
+   cp ~/net-hub-pi/app/netapp ~/Desktop
+   chmod +x ~/Desktop/netapp
+else
+   echo 'updating...'
+   rm ~/Desktop/netapp
+   cp ~/net-hub-pi/app/netapp ~/Desktop
+   chmod +x ~/Desktop/netapp
+fi
 
-cp ~/net-hub-pi/app/.gtkrc-2.0 ~
+# set double click?
+if [ ! -f ~/.gtkrc-2.0 ]; then
+   cp ~/net-hub-pi/app/.gtkrc-2.0 ~
+else
+   echo 'You may need to change the double click speed in your .gtkrc file'
+fi
+
 
 echo 'done'
