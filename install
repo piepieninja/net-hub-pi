@@ -1,0 +1,8 @@
+echo 'installing...'
+
+cp ~/net-hub-pi/app/netapp ~/Desktop
+chmod +x ~/Desktop/netapp
+
+cp ~/net-hub-pi/app/.gtkrc-2.0 ~
+
+echo 'done'

@@ -1,0 +1,5 @@
+#!/bin/bash 
+
+ehco 'starting app..'
+
+python ~/net-hub-pi/app/netapp.py
