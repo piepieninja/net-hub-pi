@@ -18,8 +18,9 @@ root.configure(background='black')
 root.focus_set() # <-- move focus to this widget
 root.bind("<Escape>", lambda e: e.widget.quit())
 
-B = Tkinter.Button(root, text ="test", bg ="grey")
+B1 = Tkinter.Button(root, text ="test", bg ="grey")
+B1.grid(row=0, column=0)
 
 
-B.pack()
+#B1.pack()
 root.mainloop()
