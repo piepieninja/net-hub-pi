@@ -1,16 +1,26 @@
 #!/bin/bash
 
-
-# udpate
-sudo apt-get update
+# udpate & upgrade. Install the python libs
 echo '========================='
+echo 'updating and upgrading...'
+sudo apt-get update
+sudo apt-get upgrade
+echo '========================='
+echo 'installing python 3 and pip...'
+sudo apt-get install python3-picamera
+sudo apt-get install python3-rpi.gpio
+sudo apt-get install python3-pip
+pip-3.2 install pibrella
+pip-3.2 install PIL
 
 # install
 if [ ! -f ~/Desktop/netapp ]; then
+   echo '========================='
    echo 'installing...'
    cp ~/net-hub-pi/app/netapp ~/Desktop
    chmod +x ~/Desktop/netapp
 else
+   echo '========================='
    echo 'updating...'
    rm ~/Desktop/netapp
    cp ~/net-hub-pi/app/netapp ~/Desktop
@@ -21,7 +31,7 @@ fi
 if [ ! -f ~/.gtkrc-2.0 ]; then
    cp ~/net-hub-pi/app/.gtkrc-2.0 ~
 else
-   echo 'You may need to change the double click speed in your .gtkrc file'
+   echo '>> You may need to change the double click speed in your .gtkrc file'
 fi
 
 echo '========================='
