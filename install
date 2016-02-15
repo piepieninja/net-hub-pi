@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# udpate & upgrade. Install the python libs
+# udpate & install the python libs
 read -p "would you like to update your OS? (recommended) [y/n]" answer
 if [[ $answer = y ]] ; then
     echo '=================================================='
