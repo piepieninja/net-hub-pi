@@ -27,8 +27,8 @@ B1 = Tkinter.Button(root, text="test", bg="grey")
 B2 = Tkinter.Button(root, text="test", bg="grey")
 B3 = Tkinter.Button(root, text="test", bg="grey")
 
-HAXimg = ImageTk.PhotoImage(Image.open("img/HAX.png"))
-HAXlabel = Label(root, image=HAXimg)
+HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
+HAXlabel = Label(root, image=HAXimgtk)
 
 B1.grid(row=2, column=0)
 B2.grid(row=2, column=1)
