@@ -6,11 +6,17 @@
 #
 
 import Tkinter
-#import PIL
-#import PIL.Image
+import socket
+
 from Tkinter import *
-#from PIL import *
 from PIL import Image, ImageTk
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(('8.8.8.8', 0))
+my_ip = s.getsockname()[0]
+
+
+################# GUI #################
 
 root = Tkinter.Tk()
 
@@ -23,7 +29,7 @@ root.configure(background='black')
 root.focus_set() # <-- move focus to this widget
 root.bind("<Escape>", lambda e: e.widget.quit())
 
-label1 = Label(root, text="Hello, world!")
+label1 = Label(root, text = "IP: " + my_ip)
 label2 = Label(root, text="Hello, world!")
 label3 = Label(root, text="Hello, world!")
 label4 = Label(root, text="Hello, world!")
