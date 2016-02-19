@@ -7,11 +7,17 @@ if [[ $answer = y ]] ; then
     echo 'updating and upgrading...'
     sudo apt-get update
 fi
+
+read -p "would you like to install the python libs? (recommended) [y/n]"
+if [[ $answer = y ]] ; then
 echo '=================================================='
 echo 'installing python libs and pip...'
+sudo apt-get install python-dev python-setuptools
 sudo apt-get install python-pip
-pip install pibrella
-pip install PIL
+sudo apt-get install libjpeg-dev
+sudo pip install pibrella
+sudo pip install Pillow # this is for PIL
+fi
 
 # install
 if [ ! -f ~/Desktop/netapp ]; then
@@ -30,6 +36,7 @@ fi
 # set double click?
 if [ ! -f ~/.gtkrc-2.0 ]; then
    cp ~/net-hub-pi/app/.gtkrc-2.0 ~
+   #. ~/.gtkrc-2.0
 else
    echo '>> You may need to change the double click speed in your .gtkrc file'
 fi
