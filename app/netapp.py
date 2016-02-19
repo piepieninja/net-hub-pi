@@ -6,7 +6,10 @@
 #
 
 import Tkinter
+#import PIL
+#import PIL.Image
 from Tkinter import *
+#from PIL import *
 from PIL import Image, ImageTk
 
 root = Tkinter.Tk()
@@ -24,7 +27,8 @@ B1 = Tkinter.Button(root, text="test", bg="grey")
 B2 = Tkinter.Button(root, text="test", bg="grey")
 B3 = Tkinter.Button(root, text="test", bg="grey")
 
-HAXimg = ImageTk.PhotoImage(Image.open("img/HAX.png"))
+img = Image.open("img/HAX.png")
+HAXimg = ImageTk.PhotoImage(img)
 HAXlabel = Label(root, image=HAXimg)
 
 B1.grid(row=2, column=0)

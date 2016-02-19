@@ -15,6 +15,7 @@ echo 'installing python libs and pip...'
 sudo apt-get install python-dev python-setuptools
 sudo apt-get install python-pip
 sudo apt-get install libjpeg-dev
+sudo apt-get install python-imaging-tk
 sudo pip install pibrella
 sudo pip install Pillow # this is for PIL
 fi
