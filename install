@@ -8,7 +8,7 @@ if [[ $answer = y ]] ; then
     sudo apt-get update
 fi
 
-read -p "would you like to install the python libs? (recommended) [y/n]"
+read -p "would you like to install the python libs? (needed first time) [y/n]"
 if [[ $answer = y ]] ; then
 echo '=================================================='
 echo 'installing python libs and pip...'
@@ -16,6 +16,7 @@ sudo apt-get install python-dev python-setuptools
 sudo apt-get install python-pip
 sudo apt-get install libjpeg-dev
 sudo apt-get install python-imaging-tk
+sudo apt-get install tk8.5-dev tcl8.5-dev
 sudo pip install pibrella
 sudo pip install Pillow # this is for PIL
 fi
