@@ -12,6 +12,12 @@ read -p "would you like to install the python libs? (needed first time) [y/n]"
 if [[ $answer = y ]] ; then
 echo '=================================================='
 echo 'installing python libs and pip...'
+# uninstall
+sudo apt-get remove wolfram-engine
+sudo apt-get remove xpdf
+sudo apt-get remove galculator
+suod apt-get remove oracle-java8-jdk
+# unstall
 sudo apt-get install python-dev python-setuptools
 sudo apt-get install python-pip
 sudo apt-get install libjpeg-dev
