@@ -32,13 +32,17 @@ def grabIP():
         return my_ip;
     else:     
         print "ERROR does not yet support " + OS
-        return "ERROR"
+        return "ERROR " + OS
 
 def onlineDevices():
     return "NOT IMPLEMENTED";
 
 def upSpeed():
-    return "NOT IMPLEMENTED";
+    if (OS == "Linux")
+
+    else:
+        print "ERROR does not yet supprt " + OS
+        return "ERROR "; + OS
 
 def downSpeed():
     return "NOT IMPLEMENTED";
@@ -61,7 +65,7 @@ OS = getOS();
 
 # frames
 topHolder = Frame(root, bg="black")
-topHolder.pack(side=TOP)
+topHolder.pack(side=TOP, fill=BOTH)
 dataFrame = Frame(topHolder, bg="black")
 dataFrame.pack(side=LEFT)
 imgFrame = Frame(topHolder, bg="black")
