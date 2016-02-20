@@ -10,6 +10,7 @@ import platform
 import Tkinter
 import socket
 import subprocess
+import time
 
 from Tkinter import *
 from PIL import Image, ImageTk
@@ -22,10 +23,25 @@ debug = TRUE
 
 def getOS(): #it's probably better to just do this once
     if (debug):
-        print "OS is" + platform.system();
+        print "OS is " + platform.system();
     return platform.system();
 
+def tick():
+    global time1
+    # get the current local time from the PC
+    time2 = time.strftime('%H:%M:%S')
+    # if time string has changed, update it
+    if time2 != time1:
+        time1 = time2
+        label5.config(text=time2)
+    # calls itself every 200 milliseconds
+    # to update the time display as needed
+    # could use >200 ms, but display gets jerky
+    label5.after(200, tick)
+
 ################# NET ################# 
+
+#### INITS ####
 
 def grabIP():
     if (OS == "Linux"):
@@ -47,7 +63,7 @@ def onlineDevices():
 
 def upSpeed():
     if (OS == "Linux"):
-        bashCommand = "bash up.sh"
+        bashCommand = "bash up.sh".strip('\n')
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output = process.communicate()[0]
         if (debug):
@@ -59,7 +75,7 @@ def upSpeed():
 
 def downSpeed():
     if (OS == "Linux"):
-        bashCommand = "bash down.sh"
+        bashCommand = "bash down.sh".strip('\n')
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output = process.communicate()[0]
         if (debug):
@@ -68,6 +84,8 @@ def downSpeed():
     else:
         print "ERROR does not yet supprt " + OS
         return "ERROR "; + OS
+
+#### LOOPS ####
 
 ################# GUI #################
 
@@ -104,6 +122,9 @@ up_speed = upSpeed()
 label3 = Label(dataFrame, anchor=N, text = up_speed, font="-weight bold", fg="green", bg="black")
 down_speed = downSpeed()
 label4 = Label(dataFrame, anchor=N, text = down_speed, font="-weight bold", fg="green", bg="black")
+time1 = ''
+label5 = Label(dataFrame, anchor=N, font="-weight bold", fg="green", bg="black")
+
 
 B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
 B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
@@ -117,6 +138,7 @@ label1.grid(row=0, column=0, sticky=Tkinter.W)
 label2.grid(row=1, column=0, sticky=Tkinter.W)
 label3.grid(row=2, column=0, sticky=Tkinter.W)
 label4.grid(row=3, column=0, sticky=Tkinter.W)
+label5.grid(row=4, column=0, sticky=Tkinter.W)
 
 HAXlabel.grid(row=0, column=0, sticky=Tkinter.E);
 
@@ -124,4 +146,5 @@ B1.grid(row=5, column=0, sticky=Tkinter.E)
 B2.grid(row=5, column=1, sticky=Tkinter.E)
 B3.grid(row=5, column=2, sticky=Tkinter.E)
 
+tick()
 root.mainloop()
