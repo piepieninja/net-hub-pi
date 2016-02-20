@@ -88,12 +88,25 @@ def downSpeed():
         print "ERROR does not yet supprt " + OS
         return "ERROR " + OS;
 
+def grabDevices():
+    if (OS == "Linux"):
+        bashCommand = "bash hosts.sh".strip('\n')
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output = process.communicate()[0]
+        if (debug):
+            print "grabbed Devices"
+        return output;
+    else:
+        print "ERROR does not yet supprt " + OS
+        return "ERROR " + OS;
+
 #### LOOPS ####
 
 def upTick():
     if (debug):
         print "testing up-speed..."
     global up_speed
+    label3.config(text="testing...")
     temp = upSpeed()
     up_speed = temp
     label3.config(text=temp)
@@ -103,10 +116,21 @@ def downTick():
     if (debug):
         print "testing down-speed..."
     global down_speed
+    label4.config(text="testing...")
     temp = downSpeed()
     down_speed = temp
     label4.config(text=temp)
     label4.after(7200000, downTick) # every 2 hours
+
+def deviceTick():
+    if (debug):
+        print "counting devices..."
+    global devices
+    label2.config(text="counting devices...")
+    temp = grabDevices()
+    devices = temp
+    label2.config(text=temp)
+    label2.after(1800000, deviceTick) # every 30 mins  
 
 ################# GUI #################
 
@@ -138,7 +162,7 @@ navFrame.pack(side=BOTTOM, fill=X)
 # widgets
 my_ip = grabIP()
 label1 = Label(dataFrame, anchor=N, text = "IP: " + my_ip, font="-weight bold", fg="green", bg="black")
-devices = onlineDevices()
+devices = 'loading...'
 label2 = Label(dataFrame, anchor=N, text = "Devices: " + devices, font="-weight bold", fg="green", bg="black")
 up_speed = 'Upload: testing...' #upSpeed()
 label3 = Label(dataFrame, anchor=N, text = up_speed, font="-weight bold", fg="green", bg="black")
@@ -149,7 +173,7 @@ label5 = Label(dataFrame, anchor=N, font="-weight bold", fg="green", bg="black")
 
 B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
 B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
-btnCls = Tkinter.Button(navFrame, text="Quit", bg="grey", gf="red") # TODO add command to close here
+btnCls = Tkinter.Button(navFrame, text="Quit", bg="grey", fg="red", command=btnClose)
 
 HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
 HAXlabel = Label(imgFrame, image=HAXimgtk)
@@ -168,6 +192,7 @@ B2.grid(row=5, column=1, sticky=Tkinter.E)
 btnCls.grid(row=5, column=2, sticky=Tkinter.E)
 
 tick()
+deviceTick();
 upTick()
 downTick()
 root.mainloop()
