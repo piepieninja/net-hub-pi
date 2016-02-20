@@ -1,2 +1,3 @@
 #!/bin/bash 
-sudo python ~/net-hub-pi/app/netapp.py
+cd ~/net-hub-pi/app/
+sudo python netapp.py
