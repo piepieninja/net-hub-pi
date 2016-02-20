@@ -1,0 +1,1 @@
+sudo nmap -sP -PU161 192.168.1.1/24 | grep "hosts up" | cut -d "(" -f2 | cut -d ")" -f1

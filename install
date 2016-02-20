@@ -17,7 +17,8 @@ sudo apt-get remove wolfram-engine
 sudo apt-get remove xpdf
 sudo apt-get remove galculator
 suod apt-get remove oracle-java8-jdk
-# unstall
+# install
+sudo apt-get install nmap
 sudo apt-get install python-dev python-setuptools
 sudo apt-get install python-pip
 sudo apt-get install libjpeg-dev

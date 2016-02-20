@@ -11,13 +11,17 @@ import Tkinter
 import socket
 import subprocess
 import time
+import sys
 
 from Tkinter import *
 from PIL import Image, ImageTk
 
 #### GLOBALS ####
 OS = ""
-debug = True
+if (len(sys.argv) > 1 and str(sys.argv[1]) == "debug"):
+    debug = True
+else:
+    debug = False
 
 ################# SYS ################# 
 
@@ -33,6 +37,10 @@ def tick():
         time1 = time2
         label5.config(text=time2)
     label5.after(200, tick)
+
+def btnClose():
+    print "quiting..."
+    sys.exit()
 
 ################# NET ################# 
 
@@ -66,7 +74,7 @@ def upSpeed():
         return output;
     else:
         print "ERROR does not yet supprt " + OS
-        return "ERROR "; + OS
+        return "ERROR " + OS;
 
 def downSpeed():
     if (OS == "Linux"):
@@ -78,7 +86,7 @@ def downSpeed():
         return output;
     else:
         print "ERROR does not yet supprt " + OS
-        return "ERROR "; + OS
+        return "ERROR " + OS;
 
 #### LOOPS ####
 
@@ -119,7 +127,7 @@ OS = getOS();
 
 # frames
 topHolder = Frame(root, bg="black")
-topHolder.pack(side=TOP, fill=BOTH)
+topHolder.pack(side=TOP)
 dataFrame = Frame(topHolder, bg="black")
 dataFrame.pack(side=LEFT)
 imgFrame = Frame(topHolder, bg="black")
@@ -139,10 +147,9 @@ label4 = Label(dataFrame, anchor=N, text = down_speed, font="-weight bold", fg="
 time1 = ''
 label5 = Label(dataFrame, anchor=N, font="-weight bold", fg="green", bg="black")
 
-
-#B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
-#B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
-#B3 = Tkinter.Button(navFrame, text="TBD", bg="grey")
+B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
+B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
+btnCls = Tkinter.Button(navFrame, text="Quit", bg="grey", gf="red") # TODO add command to close here
 
 HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
 HAXlabel = Label(imgFrame, image=HAXimgtk)
@@ -156,9 +163,9 @@ label5.grid(row=4, column=0, sticky=Tkinter.W)
 
 HAXlabel.grid(row=0, column=0, sticky=Tkinter.E);
 
-#B1.grid(row=5, column=0, sticky=Tkinter.E)
-#B2.grid(row=5, column=1, sticky=Tkinter.E)
-#B3.grid(row=5, column=2, sticky=Tkinter.E)
+B1.grid(row=5, column=0, sticky=Tkinter.E)
+B2.grid(row=5, column=1, sticky=Tkinter.E)
+btnCls.grid(row=5, column=2, sticky=Tkinter.E)
 
 tick()
 upTick()
