@@ -36,6 +36,31 @@ def run():
         print "quiting..."
         sys.exit()
 
+    def btnSpeedTest():
+        if (debug):
+            print "testing down-speed..."
+        global down_speed
+        label4.config(text="testing...")
+        temp = downSpeed()
+        down_speed = temp
+        label4.config(text=temp)
+        if (debug):
+            print "testing up-speed..."
+        global up_speed
+        label3.config(text="testing...")
+        temp = upSpeed()
+        up_speed = temp
+        label3.config(text=temp)
+
+    def btnDevicesTest():
+        if (debug):
+            print "counting devices..."
+        global devices
+        label2.config(text="counting devices...")
+        temp = grabDevices()
+        devices = temp
+        label2.config(text=temp)
+
     ################# NET #################
 
     #### INITS ####
@@ -145,7 +170,7 @@ def run():
 
     # frames
     topHolder = Frame(root, bg="black")
-    topHolder.pack(side=TOP)
+    topHolder.pack(side=TOP, fill=X)
     dataFrame = Frame(topHolder, bg="black")
     dataFrame.pack(side=LEFT)
     imgFrame = Frame(topHolder, bg="black")
@@ -155,19 +180,19 @@ def run():
 
     # widgets
     my_ip = grabIP()
-    label1 = Label(dataFrame, anchor=N, text = "IP: " + my_ip, font="-weight bold", fg="green", bg="black")
+    label1 = Label(dataFrame, anchor=N, text = "IP: " + my_ip, font=guiFont, fg="green", bg="black")
     devices = 'loading...'
-    label2 = Label(dataFrame, anchor=N, text = "Devices: " + devices, font="-weight bold", fg="green", bg="black")
+    label2 = Label(dataFrame, anchor=N, text = "Devices: " + devices, font=guiFont, fg="green", bg="black")
     up_speed = 'Upload: testing...' #upSpeed()
-    label3 = Label(dataFrame, anchor=N, text = up_speed, font="-weight bold", fg="green", bg="black")
+    label3 = Label(dataFrame, anchor=N, text = up_speed, font=guiFont, fg="green", bg="black")
     down_speed = "Download: testing..." #downSpeed()
-    label4 = Label(dataFrame, anchor=N, text = down_speed, font="-weight bold", fg="green", bg="black")
+    label4 = Label(dataFrame, anchor=N, text = down_speed, font=guiFont, fg="green", bg="black")
     time1 = ''
-    label5 = Label(dataFrame, anchor=N, font="-weight bold", fg="green", bg="black")
+    label5 = Label(dataFrame, anchor=N, font=guiFont, fg="green", bg="black")
 
-    B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
-    B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
-    btnCls = Tkinter.Button(navFrame, text="Quit", bg="grey", fg="red", command=btnClose)
+    B1 = Tkinter.Button(navFrame, text="Speed Test", font=guiFont, bg="grey", fg="blue", command=btnSpeedTest)
+    B2 = Tkinter.Button(navFrame, text="Scan Devices",font=guiFont, bg="grey", fg="blue", command=btnDevicesTest)
+    btnCls = Tkinter.Button(navFrame, text="Quit", font=guiFont, bg="grey", fg="red", command=btnClose)
 
     HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
     HAXlabel = Label(imgFrame, image=HAXimgtk)
@@ -186,27 +211,26 @@ def run():
     btnCls.grid(row=5, column=2, sticky=Tkinter.E)
 
     # loops and ticks
-    global DOTEST
-    if (DOTEST):
-        deviceTick()
-        upTick()
-        downTick()
-    DOTEST = True
     tick()
+    root.after(testDelay, deviceTick) # delay because these take forever
+    root.after(testDelay, upTick) # delay because these take forever
+    root.after(testDelay, downTick) # delay because these take forever
     root.mainloop()
 
 ################# MAIN #################
 
 #### GLOBALS ####
 global OS
-global DOTEST
 global time1
+global guiFont
+global testDelay
 
 #### MAIN ####
 
 OS = ""
-DOTEST = False
 time1 = ''
+guiFont = ("verdana",12,"bold")
+testDelay = 5000 # 5 seconds - in miliseconds
 
 if (len(sys.argv) > 1 and str(sys.argv[1]) == "debug"):
     debug = True
