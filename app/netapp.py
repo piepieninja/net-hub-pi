@@ -22,6 +22,12 @@ def grabIP():
 def onlineDevices():
     return "NOT IMPLEMENTED";
 
+def upSpeed():
+    return "NOT IMPLEMENTED";
+
+def downSpeed():
+    return "NOT IMPLEMENTED";
+
 ################# GUI #################
 
 root = Tkinter.Tk()
@@ -50,22 +56,28 @@ my_ip = grabIP()
 label1 = Label(dataFrame, anchor=N, text = "IP: " + my_ip, font="-weight bold", fg="green", bg="black")
 devices = onlineDevices()
 label2 = Label(dataFrame, anchor=N, text = "Devices: " + devices, font="-weight bold", fg="green", bg="black")
+up_speed = upSpeed()
+label3 = Label(dataFrame, anchor=N, text = "UP: " + up_speed, font="-weight bold", fg="green", bg="black")
+down_speed = downSpeed()
+label4 = Label(dataFrame, anchor=N, text = "DOWN: " + down_speed, font="-weight bold", fg="green", bg="black")
 
-B1 = Tkinter.Button(navFrame, text="test", bg="grey")
-B2 = Tkinter.Button(navFrame, text="test", bg="grey")
-B3 = Tkinter.Button(navFrame, text="test", bg="grey")
+B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
+B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
+B3 = Tkinter.Button(navFrame, text="TBD", bg="grey")
 
 HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
 HAXlabel = Label(imgFrame, image=HAXimgtk)
 
 # grid assignments
-label1.grid(row=0, column=0)
-label2.grid(row=1, column=0)
+label1.grid(row=0, column=0, sticky=Tkinter.W)
+label2.grid(row=1, column=0, sticky=Tkinter.W)
+label3.grid(row=2, column=0, sticky=Tkinter.W)
+label4.grid(row=3, column=0, sticky=Tkinter.W)
 
-HAXlabel.pack(anchor=E);
+HAXlabel.grid(row=0, column=0, sticky=Tkinter.E);
 
-B1.grid(row=5, column=0)
-B2.grid(row=5, column=1)
-B3.grid(row=5, column=2)
+B1.grid(row=5, column=0, sticky=Tkinter.E)
+B2.grid(row=5, column=1, sticky=Tkinter.E)
+B3.grid(row=5, column=2, sticky=Tkinter.E)
 
 root.mainloop()
