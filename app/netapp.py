@@ -9,14 +9,20 @@ import os
 import platform
 import Tkinter
 import socket
+import subprocess
 
 from Tkinter import *
 from PIL import Image, ImageTk
 
+#### GLOBALS ####
+OS = ""
+debug = TRUE
+
 ################# SYS ################# 
 
 def getOS(): #it's probably better to just do this once
-    #print ">> OS is " + platform.system()
+    if (debug):
+        print "OS is" + platform.system();
     return platform.system();
 
 ################# NET ################# 
@@ -26,11 +32,13 @@ def grabIP():
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 0))
         my_ip = s.getsockname()[0]
+        if (debug):
+            print "grabbed IP"
         return my_ip;
     elif (OS == "Darwin"):
         my_ip = socket.gethostbyname(socket.gethostname())
         return my_ip;
-    else:     
+    else:
         print "ERROR does not yet support " + OS
         return "ERROR " + OS
 
@@ -38,14 +46,28 @@ def onlineDevices():
     return "NOT IMPLEMENTED";
 
 def upSpeed():
-    if (OS == "Linux")
-
+    if (OS == "Linux"):
+        bashCommand = "bash up.sh"
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output = process.communicate()[0]
+        if (debug):
+            print "grabbed UP speed"
+        return output;
     else:
         print "ERROR does not yet supprt " + OS
         return "ERROR "; + OS
 
 def downSpeed():
-    return "NOT IMPLEMENTED";
+    if (OS == "Linux"):
+        bashCommand = "bash down.sh"
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output = process.communicate()[0]
+        if (debug):
+            print "grabbed DOWN speed"
+        return output;
+    else:
+        print "ERROR does not yet supprt " + OS
+        return "ERROR "; + OS
 
 ################# GUI #################
 
@@ -79,9 +101,9 @@ label1 = Label(dataFrame, anchor=N, text = "IP: " + my_ip, font="-weight bold", 
 devices = onlineDevices()
 label2 = Label(dataFrame, anchor=N, text = "Devices: " + devices, font="-weight bold", fg="green", bg="black")
 up_speed = upSpeed()
-label3 = Label(dataFrame, anchor=N, text = "UP: " + up_speed, font="-weight bold", fg="green", bg="black")
+label3 = Label(dataFrame, anchor=N, text = up_speed, font="-weight bold", fg="green", bg="black")
 down_speed = downSpeed()
-label4 = Label(dataFrame, anchor=N, text = "DOWN: " + down_speed, font="-weight bold", fg="green", bg="black")
+label4 = Label(dataFrame, anchor=N, text = down_speed, font="-weight bold", fg="green", bg="black")
 
 B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
 B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
