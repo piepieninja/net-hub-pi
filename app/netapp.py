@@ -32,29 +32,31 @@ root.configure(background='black')
 root.focus_set() # <-- move focus to this widget
 root.bind("<Escape>", lambda e: e.widget.quit())
 
+# frames
+dataFrame = Frame(root, bg="black")
+dataFrame.pack(side=LEFT)
+imgFrame = Frame(root, bg="black")
+imgFrame.pack(side=RIGHT)
+navFrame = Frame(root, bg="black")
+navFrame.pack(side=BOTTOM, fill=X)
+
 # widgets
 my_ip = grabIP()
-label1 = Label(root, text = "IP: " + my_ip, fg="green", bg="black")
-#label2 = Label(root, text="Hello, world!")
-#label3 = Label(root, text="Hello, world!")
-#label4 = Label(root, text="Hello, world!")
-#label5 = Label(root, text="")
+label1 = Label(dataFrame, text = "IP: " + my_ip, font="-weight bold", fg="green", bg="black")
 
-B1 = Tkinter.Button(root, text="test", bg="grey")
-B2 = Tkinter.Button(root, text="test", bg="grey")
-B3 = Tkinter.Button(root, text="test", bg="grey")
+B1 = Tkinter.Button(navFrame, text="test", bg="grey")
+B2 = Tkinter.Button(navFrame, text="test", bg="grey")
+B3 = Tkinter.Button(navFrame, text="test", bg="grey")
 
 HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
-HAXlabel = Label(root, image=HAXimgtk)
+HAXlabel = Label(imgFrame, image=HAXimgtk)
 
 # grid assignments
-label1.grid(row=0, column=0)
-#label2.grid(row=1, column=0)
-#label3.grid(row=2, column=0)
-#label4.grid(row=3, column=0)
-#label5.grid(row=4, column=0)
+#label1.grid(row=0, column=0)
+label1.pack()
 
-HAXlabel.grid(row=0, column=3)
+#HAXlabel.grid(row=0, column=3)
+HAXlabel.pack();
 
 B1.grid(row=5, column=0)
 B2.grid(row=5, column=1)
