@@ -1,0 +1,1 @@
+speedtest-cli --simple | grep "Upload"

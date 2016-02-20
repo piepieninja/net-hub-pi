@@ -25,6 +25,7 @@ sudo apt-get install python-imaging-tk
 sudo apt-get install tk8.5-dev tcl8.5-dev
 sudo pip install pibrella
 sudo pip install Pillow # this is for PIL
+sudo pip install speedtest-cli
 fi
 
 # install
