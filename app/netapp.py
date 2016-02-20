@@ -16,6 +16,7 @@ from PIL import Image, ImageTk
 ################# SYS ################# 
 
 def getOS(): #it's probably better to just do this once
+    #print ">> OS is " + platform.system()
     return platform.system();
 
 ################# NET ################# 
@@ -25,6 +26,9 @@ def grabIP():
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 0))
         my_ip = s.getsockname()[0]
+        return my_ip;
+    elif (OS == "Darwin"):
+        my_ip = socket.gethostbyname(socket.gethostname())
         return my_ip;
     else:     
         print "ERROR does not yet support " + OS
