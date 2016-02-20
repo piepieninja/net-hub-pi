@@ -16,13 +16,6 @@ import sys
 from Tkinter import *
 from PIL import Image, ImageTk
 
-#### GLOBALS ####
-OS = ""
-if (len(sys.argv) > 1 and str(sys.argv[1]) == "debug"):
-    debug = True
-else:
-    debug = False
-
 ################# SYS ################# 
 
 def getOS(): #it's probably better to just do this once
@@ -134,65 +127,89 @@ def deviceTick():
 
 ################# GUI #################
 
-root = Tkinter.Tk()
+def runGUI():
+    root = Tkinter.Tk()
+    
+    # make it cover the entire screen
+    w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+    root.title("Hacker House Network")
+    if (not debug):
+        root.overrideredirect(1) # <-- this removes the menu items on top. commented for testing
+        root.geometry("%dx%d+0+0" % (w, h))
+    root.configure(background='black')
+    root.focus_set() # <-- move focus to this widget
+    root.bind("<Escape>", lambda e: e.widget.quit())
+    
+    # get OS
+    OS = getOS();
 
-# make it cover the entire screen
-w, h = root.winfo_screenwidth(), root.winfo_screenheight()
-root.title("Hacker House Network")
-if (not debug):
-    root.overrideredirect(1) # <-- this removes the menu items on top. commented for testing
-    root.geometry("%dx%d+0+0" % (w, h))
-root.configure(background='black')
-root.focus_set() # <-- move focus to this widget
-root.bind("<Escape>", lambda e: e.widget.quit())
+    # frames
+    topHolder = Frame(root, bg="black")
+    topHolder.pack(side=TOP)
+    dataFrame = Frame(topHolder, bg="black")
+    dataFrame.pack(side=LEFT)
+    imgFrame = Frame(topHolder, bg="black")
+    imgFrame.pack(side=RIGHT)
+    navFrame = Frame(root, bg="black")
+    navFrame.pack(side=BOTTOM, fill=X)
 
-# get OS
-OS = getOS();
+    # widgets
+    my_ip = grabIP()
+    label1 = Label(dataFrame, anchor=N, text = "IP: " + my_ip, font="-weight bold", fg="green", bg="black")
+    devices = 'loading...'
+    label2 = Label(dataFrame, anchor=N, text = "Devices: " + devices, font="-weight bold", fg="green", bg="black")
+    up_speed = 'Upload: testing...' #upSpeed()
+    label3 = Label(dataFrame, anchor=N, text = up_speed, font="-weight bold", fg="green", bg="black")
+    down_speed = "Download: testing..." #downSpeed()
+    label4 = Label(dataFrame, anchor=N, text = down_speed, font="-weight bold", fg="green", bg="black")
+    time1 = ''
+    label5 = Label(dataFrame, anchor=N, font="-weight bold", fg="green", bg="black")
+    
+    B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
+    B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
+    btnCls = Tkinter.Button(navFrame, text="Quit", bg="grey", fg="red", command=btnClose)
+    
+    HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
+    HAXlabel = Label(imgFrame, image=HAXimgtk)
+    
+    # grid assignments
+    label1.grid(row=0, column=0, sticky=Tkinter.W)
+    label2.grid(row=1, column=0, sticky=Tkinter.W)
+    label3.grid(row=2, column=0, sticky=Tkinter.W)
+    label4.grid(row=3, column=0, sticky=Tkinter.W)
+    label5.grid(row=4, column=0, sticky=Tkinter.W)
+    
+    HAXlabel.grid(row=0, column=0, sticky=Tkinter.E);
 
-# frames
-topHolder = Frame(root, bg="black")
-topHolder.pack(side=TOP)
-dataFrame = Frame(topHolder, bg="black")
-dataFrame.pack(side=LEFT)
-imgFrame = Frame(topHolder, bg="black")
-imgFrame.pack(side=RIGHT)
-navFrame = Frame(root, bg="black")
-navFrame.pack(side=BOTTOM, fill=X)
+    B1.grid(row=5, column=0, sticky=Tkinter.E)
+    B2.grid(row=5, column=1, sticky=Tkinter.E)
+    btnCls.grid(row=5, column=2, sticky=Tkinter.E)
+    
+    # loops and ticks
+    global DOTEST
+    if (DOTEST):
+        deviceTick()
+        upTick()
+        downTick()
+    DOTEST = True
+    tick()
+    root.mainloop()
 
-# widgets
-my_ip = grabIP()
-label1 = Label(dataFrame, anchor=N, text = "IP: " + my_ip, font="-weight bold", fg="green", bg="black")
-devices = 'loading...'
-label2 = Label(dataFrame, anchor=N, text = "Devices: " + devices, font="-weight bold", fg="green", bg="black")
-up_speed = 'Upload: testing...' #upSpeed()
-label3 = Label(dataFrame, anchor=N, text = up_speed, font="-weight bold", fg="green", bg="black")
-down_speed = "Download: testing..." #downSpeed()
-label4 = Label(dataFrame, anchor=N, text = down_speed, font="-weight bold", fg="green", bg="black")
-time1 = ''
-label5 = Label(dataFrame, anchor=N, font="-weight bold", fg="green", bg="black")
+################# MAIN #################
 
-B1 = Tkinter.Button(navFrame, text="TBD", bg="grey")
-B2 = Tkinter.Button(navFrame, text="TBD", bg="grey")
-btnCls = Tkinter.Button(navFrame, text="Quit", bg="grey", fg="red", command=btnClose)
+#### GLOBALS ####
+global OS
+global DOTEST
+global time1
 
-HAXimgtk = ImageTk.PhotoImage(Image.open("img/HAX.png"))
-HAXlabel = Label(imgFrame, image=HAXimgtk)
+#### MAIN ####
 
-# grid assignments
-label1.grid(row=0, column=0, sticky=Tkinter.W)
-label2.grid(row=1, column=0, sticky=Tkinter.W)
-label3.grid(row=2, column=0, sticky=Tkinter.W)
-label4.grid(row=3, column=0, sticky=Tkinter.W)
-label5.grid(row=4, column=0, sticky=Tkinter.W)
+OS = ""
+DOTEST = False
 
-HAXlabel.grid(row=0, column=0, sticky=Tkinter.E);
+if (len(sys.argv) > 1 and str(sys.argv[1]) == "debug"):
+    debug = True
+else:
+    debug = False
 
-B1.grid(row=5, column=0, sticky=Tkinter.E)
-B2.grid(row=5, column=1, sticky=Tkinter.E)
-btnCls.grid(row=5, column=2, sticky=Tkinter.E)
-
-tick()
-deviceTick();
-upTick()
-downTick()
-root.mainloop()
+runGUI()
