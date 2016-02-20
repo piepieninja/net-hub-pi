@@ -5,19 +5,30 @@
 #
 #
 
+import os
+import platform
 import Tkinter
 import socket
 
 from Tkinter import *
 from PIL import Image, ImageTk
 
+################# SYS ################# 
+
+def getOS(): #it's probably better to just do this once
+    return platform.system();
+
 ################# NET ################# 
 
 def grabIP():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(('8.8.8.8', 0))
-    my_ip = s.getsockname()[0]
-    return my_ip;
+    if (OS == "Linux"):
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 0))
+        my_ip = s.getsockname()[0]
+        return my_ip;
+    else:     
+        print "ERROR does not yet support " + OS
+        return "ERROR"
 
 def onlineDevices():
     return "NOT IMPLEMENTED";
@@ -40,6 +51,9 @@ root.title("Hacker House Network")
 root.configure(background='black')
 root.focus_set() # <-- move focus to this widget
 root.bind("<Escape>", lambda e: e.widget.quit())
+
+# get OS
+OS = getOS();
 
 # frames
 topHolder = Frame(root, bg="black")
